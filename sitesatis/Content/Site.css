@@ -1,0 +1,49 @@
+﻿
+.menu ul {
+    margin: 0px;
+    padding: 0px;
+    border-top: 15px solid #343a40;
+    border-radius: 1px;
+}
+.menu ul li {
+    border-radius: 5px 5px 0px 0px;
+    list-style: none;
+    border-bottom: 1px solid #66644e;
+    background-color: white;
+    display: block;
+}
+.menu ul li a {
+    font-weight:bold;
+    font-size:18pt;
+    color:#33322e;
+    padding:10px 15px;
+    display: block;
+    text-decoration:none;
+    transition-duration:0.3s;
+}
+.menu ul li a:hover {
+    background-color: #deded2;
+}
+
+
+
+.search-container button {
+    padding: 6px 14px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    float:left;
+    cursor: pointer;
+}
+.search-container button:hover {
+    background: #ccc;
+}
+input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+    width:100%;
+}

@@ -1,0 +1,25 @@
+﻿@using sitesatis.Models.entity
+@model sitesatis.Controllers.homeviewmodel
+@{
+    ViewBag.Title = "Home Page";
+}
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var product in Model.homeproduct)
+            {
+                <div class="col-xl-3 col-6">
+                    <div class="card">
+                        <img class="card-img-top" src="~/image/@product.prouct_image_path" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">@product.product_name</h4>
+                            <p class="card-text">@product.product_content</p>
+                            <a href="#" class="btn " style="background-color:#deded2;">ürünü göster</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+

@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="satissitesivol1DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="autorization">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="autorization_name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="cargo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cargo_company" Type="nvarchar" MaxLength="50" />
+          <Property Name="en_cm" Type="int" />
+          <Property Name="boy_vm" Type="int" />
+          <Property Name="agirlik_kg" Type="int" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="cargo_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cargo_type" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menu_link_name" Type="int" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="product_content" Type="nvarchar" MaxLength="50" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="cargo_type_id" Type="int" />
+          <Property Name="cargo_id" Type="int" />
+          <Property Name="product_price" Type="int" />
+          <Property Name="prouct_image_path" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="publisher" Type="int" />
+          <Property Name="product_quantity" Type="int" />
+          <Property Name="repository_id" Type="int" />
+          <Property Name="product_add_time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="repository">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="repository_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="repository_location" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sitemaster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="site_master_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_master_link" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sitepage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="site_master_id" Type="int" />
+          <Property Name="site_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_control" Type="nvarchar" MaxLength="50" />
+          <Property Name="site_link" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aoutorization_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_password" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <Association Name="FK__menu__menu_link___4316F928">
+          <End Role="sitepage" Type="Self.sitepage" Multiplicity="0..1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sitepage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="menu_link_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__cargo_i__4D94879B">
+          <End Role="cargo" Type="Self.cargo" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="cargo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__cargo_t__4CA06362">
+          <End Role="cargo_type" Type="Self.cargo_type" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargo_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="cargo_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__categor__4BAC3F29">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__publish__4E88ABD4">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="publisher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__reposit__4F7CD00D">
+          <End Role="repository" Type="Self.repository" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="repository">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="repository_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sitepage__site_m__403A8C7D">
+          <End Role="sitemaster" Type="Self.sitemaster" Multiplicity="0..1" />
+          <End Role="sitepage" Type="Self.sitepage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sitemaster">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sitepage">
+              <PropertyRef Name="site_master_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__aoutoriza__398D8EEE">
+          <End Role="autorization" Type="Self.autorization" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="autorization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="aoutorization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="satissitesivol1DBModelStoreContainer">
+          <EntitySet Name="autorization" EntityType="Self.autorization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cargo" EntityType="Self.cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cargo_type" EntityType="Self.cargo_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="repository" EntityType="Self.repository" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sitemaster" EntityType="Self.sitemaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sitepage" EntityType="Self.sitepage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__menu__menu_link___4316F928" Association="Self.FK__menu__menu_link___4316F928">
+            <End Role="sitepage" EntitySet="sitepage" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__cargo_i__4D94879B" Association="Self.FK__product__cargo_i__4D94879B">
+            <End Role="cargo" EntitySet="cargo" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__cargo_t__4CA06362" Association="Self.FK__product__cargo_t__4CA06362">
+            <End Role="cargo_type" EntitySet="cargo_type" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__categor__4BAC3F29" Association="Self.FK__product__categor__4BAC3F29">
+            <End Role="category" EntitySet="category" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__publish__4E88ABD4" Association="Self.FK__product__publish__4E88ABD4">
+            <End Role="users" EntitySet="users" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__reposit__4F7CD00D" Association="Self.FK__product__reposit__4F7CD00D">
+            <End Role="repository" EntitySet="repository" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sitepage__site_m__403A8C7D" Association="Self.FK__sitepage__site_m__403A8C7D">
+            <End Role="sitemaster" EntitySet="sitemaster" />
+            <End Role="sitepage" EntitySet="sitepage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__aoutoriza__398D8EEE" Association="Self.FK__users__aoutoriza__398D8EEE">
+            <End Role="autorization" EntitySet="autorization" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="satissitesivol1DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="autorization">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="autorization_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__aoutoriza__398D8EEE" FromRole="autorization" ToRole="users" />
+        </EntityType>
+        <EntityType Name="cargo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cargo_company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="en_cm" Type="Int32" />
+          <Property Name="boy_vm" Type="Int32" />
+          <Property Name="agirlik_kg" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__cargo_i__4D94879B" FromRole="cargo" ToRole="product" />
+        </EntityType>
+        <EntityType Name="cargo_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cargo_type1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__cargo_t__4CA06362" FromRole="cargo_type" ToRole="product" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__categor__4BAC3F29" FromRole="category" ToRole="product" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menu_link_name" Type="Int32" />
+          <NavigationProperty Name="sitepage" Relationship="Self.FK__menu__menu_link___4316F928" FromRole="menu" ToRole="sitepage" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="product_content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="cargo_type_id" Type="Int32" />
+          <Property Name="cargo_id" Type="Int32" />
+          <Property Name="product_price" Type="Int32" />
+          <Property Name="prouct_image_path" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="publisher" Type="Int32" />
+          <Property Name="product_quantity" Type="Int32" />
+          <Property Name="repository_id" Type="Int32" />
+          <Property Name="product_add_time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="cargo" Relationship="Self.FK__product__cargo_i__4D94879B" FromRole="product" ToRole="cargo" />
+          <NavigationProperty Name="cargo_type" Relationship="Self.FK__product__cargo_t__4CA06362" FromRole="product" ToRole="cargo_type" />
+          <NavigationProperty Name="category" Relationship="Self.FK__product__categor__4BAC3F29" FromRole="product" ToRole="category" />
+          <NavigationProperty Name="user" Relationship="Self.FK__product__publish__4E88ABD4" FromRole="product" ToRole="users" />
+          <NavigationProperty Name="repository" Relationship="Self.FK__product__reposit__4F7CD00D" FromRole="product" ToRole="repository" />
+        </EntityType>
+        <EntityType Name="repository">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="repository_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="repository_location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__reposit__4F7CD00D" FromRole="repository" ToRole="product" />
+        </EntityType>
+        <EntityType Name="sitemaster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="site_master_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_master_link" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="sitepages" Relationship="Self.FK__sitepage__site_m__403A8C7D" FromRole="sitemaster" ToRole="sitepage" />
+        </EntityType>
+        <EntityType Name="sitepage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="site_master_id" Type="Int32" />
+          <Property Name="site_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_control" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="site_link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="menus" Relationship="Self.FK__menu__menu_link___4316F928" FromRole="sitepage" ToRole="menu" />
+          <NavigationProperty Name="sitemaster" Relationship="Self.FK__sitepage__site_m__403A8C7D" FromRole="sitepage" ToRole="sitemaster" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aoutorization_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="autorization" Relationship="Self.FK__users__aoutoriza__398D8EEE" FromRole="users" ToRole="autorization" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__publish__4E88ABD4" FromRole="users" ToRole="product" />
+        </EntityType>
+        <Association Name="FK__users__aoutoriza__398D8EEE">
+          <End Role="autorization" Type="Self.autorization" Multiplicity="0..1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="autorization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="aoutorization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__cargo_i__4D94879B">
+          <End Role="cargo" Type="Self.cargo" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="cargo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__cargo_t__4CA06362">
+          <End Role="cargo_type" Type="Self.cargo_type" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargo_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="cargo_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__categor__4BAC3F29">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__menu__menu_link___4316F928">
+          <End Role="sitepage" Type="Self.sitepage" Multiplicity="0..1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sitepage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="menu_link_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__publish__4E88ABD4">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="publisher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__reposit__4F7CD00D">
+          <End Role="repository" Type="Self.repository" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="repository">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="repository_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sitepage__site_m__403A8C7D">
+          <End Role="sitemaster" Type="Self.sitemaster" Multiplicity="0..1" />
+          <End Role="sitepage" Type="Self.sitepage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sitemaster">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sitepage">
+              <PropertyRef Name="site_master_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="satissitesivol1DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="autorizations" EntityType="Self.autorization" />
+          <EntitySet Name="cargoes" EntityType="Self.cargo" />
+          <EntitySet Name="cargo_type" EntityType="Self.cargo_type" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="menus" EntityType="Self.menu" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="repositories" EntityType="Self.repository" />
+          <EntitySet Name="sitemasters" EntityType="Self.sitemaster" />
+          <EntitySet Name="sitepages" EntityType="Self.sitepage" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__users__aoutoriza__398D8EEE" Association="Self.FK__users__aoutoriza__398D8EEE">
+            <End Role="autorization" EntitySet="autorizations" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__cargo_i__4D94879B" Association="Self.FK__product__cargo_i__4D94879B">
+            <End Role="cargo" EntitySet="cargoes" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__cargo_t__4CA06362" Association="Self.FK__product__cargo_t__4CA06362">
+            <End Role="cargo_type" EntitySet="cargo_type" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__categor__4BAC3F29" Association="Self.FK__product__categor__4BAC3F29">
+            <End Role="category" EntitySet="categories" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__menu__menu_link___4316F928" Association="Self.FK__menu__menu_link___4316F928">
+            <End Role="sitepage" EntitySet="sitepages" />
+            <End Role="menu" EntitySet="menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__publish__4E88ABD4" Association="Self.FK__product__publish__4E88ABD4">
+            <End Role="users" EntitySet="users" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__reposit__4F7CD00D" Association="Self.FK__product__reposit__4F7CD00D">
+            <End Role="repository" EntitySet="repositories" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sitepage__site_m__403A8C7D" Association="Self.FK__sitepage__site_m__403A8C7D">
+            <End Role="sitemaster" EntitySet="sitemasters" />
+            <End Role="sitepage" EntitySet="sitepages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="satissitesivol1DBModelStoreContainer" CdmEntityContainer="satissitesivol1DBEntities">
+          <EntitySetMapping Name="autorizations">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.autorization">
+              <MappingFragment StoreEntitySet="autorization">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="autorization_name" ColumnName="autorization_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cargoes">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.cargo">
+              <MappingFragment StoreEntitySet="cargo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cargo_company" ColumnName="cargo_company" />
+                <ScalarProperty Name="en_cm" ColumnName="en_cm" />
+                <ScalarProperty Name="boy_vm" ColumnName="boy_vm" />
+                <ScalarProperty Name="agirlik_kg" ColumnName="agirlik_kg" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cargo_type">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.cargo_type">
+              <MappingFragment StoreEntitySet="cargo_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cargo_type1" ColumnName="cargo_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="menus">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.menu">
+              <MappingFragment StoreEntitySet="menu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="menu_link_name" ColumnName="menu_link_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_content" ColumnName="product_content" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="cargo_type_id" ColumnName="cargo_type_id" />
+                <ScalarProperty Name="cargo_id" ColumnName="cargo_id" />
+                <ScalarProperty Name="product_price" ColumnName="product_price" />
+                <ScalarProperty Name="prouct_image_path" ColumnName="prouct_image_path" />
+                <ScalarProperty Name="publisher" ColumnName="publisher" />
+                <ScalarProperty Name="product_quantity" ColumnName="product_quantity" />
+                <ScalarProperty Name="repository_id" ColumnName="repository_id" />
+                <ScalarProperty Name="product_add_time" ColumnName="product_add_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="repositories">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.repository">
+              <MappingFragment StoreEntitySet="repository">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="repository_name" ColumnName="repository_name" />
+                <ScalarProperty Name="repository_location" ColumnName="repository_location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sitemasters">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.sitemaster">
+              <MappingFragment StoreEntitySet="sitemaster">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="site_master_name" ColumnName="site_master_name" />
+                <ScalarProperty Name="site_master_link" ColumnName="site_master_link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sitepages">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.sitepage">
+              <MappingFragment StoreEntitySet="sitepage">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="site_master_id" ColumnName="site_master_id" />
+                <ScalarProperty Name="site_name" ColumnName="site_name" />
+                <ScalarProperty Name="site_control" ColumnName="site_control" />
+                <ScalarProperty Name="site_link" ColumnName="site_link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="satissitesivol1DBModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="aoutorization_id" ColumnName="aoutorization_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

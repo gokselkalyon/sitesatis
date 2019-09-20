@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="230021b53f7345c18d7ca39af402bee2" Name="Diagram1">
+        <EntityTypeShape EntityType="satissitesivol1DBModel.autorization" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.cargo" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.cargo_type" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.category" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.menu" Width="1.5" PointX="10.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.product" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.repository" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.sitemaster" Width="1.5" PointX="5.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.sitepage" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="satissitesivol1DBModel.user" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__users__aoutoriza__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__product__cargo_i__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__product__cargo_t__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__product__categor__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__menu__menu_link___4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__product__publish__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__product__reposit__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="satissitesivol1DBModel.FK__sitepage__site_m__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

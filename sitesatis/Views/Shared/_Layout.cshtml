@@ -1,0 +1,128 @@
+﻿@model sitesatis.Controllers.homeviewmodel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container-fluid ">
+        @* menu *@
+        <div class="row pt-2" style="background-color:#f2f1e9;">
+            <div class="col-lg-12">
+                <div class="container">
+                    <div class="row p-1">
+                        <div class="col-lg-1 p-2 ">
+                            <img src="~/image/cart.png" />
+                        </div>
+                        <div class="col-lg-8 pt-3">
+                            <div class="search-container">
+                                <form action=" " >
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-11  p-0">
+                                                <input type="text" placeholder="Search.." name="search">
+                                            </div>
+                                            <div class="col-1 p-0">
+                                                <button type="submit"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 pt-3">
+                            
+                            <nav class="navbar navbar-expand-lg navbar-light font-weight-bold">
+
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                        @foreach (var item in Model.homemenu)
+                                        {
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="#">@item.sitepage.site_name</a>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* banner *@
+        <div class="row" style="background-image:url('https://www.kaft.com/static/images/content/banner/500_TR.jpg?1568618994000'); background-size:cover; background-attachment:local;background-position:center; height:50vh;">    
+        </div>
+        @* left navbar  *@
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-11 ">
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-3 ">
+                            <div class="container-fluid">
+                                <div class="row d-flex justify-content-center">
+
+                                    <div class="col-12 pt-2 menu ">
+                                        <div class="col-12 pt-2 bg-dark text-light font-weight-bold text-uppercase" style="font-size:15pt;">
+                                            kategori
+                                        </div>
+                                        <ul>
+                                            @foreach (var category in Model.homecategoriy)
+                                            {
+                                                <li><a href="#">@category.category_name</a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row mt-5 d-flex justify-content-center">
+
+                                    <div class="col-12 pt-2 menu ">
+                                        <div class="col-12 pt-2 bg-dark text-light font-weight-bold text-uppercase" style="font-size:15pt;">
+                                            filtre
+                                        </div>
+                                        <ul>
+                                            <li><a href="#">erkek</a></li>
+                                            <li><a href="#">kadın</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9  ">
+                            <div class="container-fluid bg-dark mt-2">
+                                <div class="row pt-2">
+                                    <div class="col-12 pt-3 mt-2 bg-light pb-5">
+                                        @RenderBody()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bg-dark pt-5">
+            <div class="col-11 text-center text-light">
+                &copy; copyright göksel kalyon
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
