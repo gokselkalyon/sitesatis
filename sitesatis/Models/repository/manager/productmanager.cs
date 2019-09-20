@@ -41,5 +41,9 @@ namespace sitesatis.Models.repository.manager
             DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
         }
+        public int count()
+        {
+            return DB.products.Count();
+        }
     }
 }
