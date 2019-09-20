@@ -33,25 +33,11 @@ namespace sitesatis.Controllers
                     var row = sheet.CreateRow(i);
 
                     var cell = row.CreateCell(0);cell.SetCellValue(item.product_name.ToString());
-                    var cell1 = row.CreateCell(1);cell.SetCellValue(item.product_name.ToString());
-                    var cell2 = row.CreateCell(2);cell.SetCellValue(item.product_name.ToString());
-                    var cell3 = row.CreateCell(3);cell.SetCellValue(item.product_name.ToString());
-                    var cell4 = row.CreateCell(4);cell.SetCellValue(item.product_name.ToString());
-                    var cell5 = row.CreateCell(5);cell.SetCellValue(item.product_name.ToString());
-                    var cell6 = row.CreateCell(6);cell.SetCellValue(item.product_name.ToString());
-                    var cell7 = row.CreateCell(7);cell.SetCellValue(item.product_name.ToString());
-                    var cell8 = row.CreateCell(8);cell.SetCellValue(item.product_name.ToString());
-                    var cell9 = row.CreateCell(9);cell.SetCellValue(item.product_name.ToString());
-                    var cell10 = row.CreateCell(10);cell.SetCellValue(item.product_name.ToString());
-                    var cell11 = row.CreateCell(11);cell.SetCellValue(item.product_name.ToString());
 
 
 
                 }
             }
-            
-            
-
             var stream = new MemoryStream();
             workbook.Write(stream);
 
@@ -63,32 +49,20 @@ namespace sitesatis.Controllers
             return View();
         }
 
-        // GET: Product/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(product product)
         {
             try
             {
-                // TODO: Add insert logic here
-
+               
+                pm.create(product);
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
-        }
-
-        // GET: Product/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // POST: Product/Edit/5
@@ -107,20 +81,12 @@ namespace sitesatis.Controllers
             }
         }
 
-        // GET: Product/Delete/5
+       
         public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Product/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                pm.delete(id);
                 return RedirectToAction("Index");
             }
             catch

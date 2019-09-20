@@ -1,4 +1,4 @@
-﻿using NPOI.HSSF.UserModel;
+﻿/*using NPOI.HSSF.UserModel;
 using SungurTek.Helpers.Raporlar;
 using SungurTek.Models.ViewModels.HastaAcezeTakip;
 using System;
@@ -91,4 +91,4 @@ namespace SungurTek.Helpers.BakimHizmetleri
             }
         }
     }
-}
+}*/

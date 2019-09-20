@@ -47,7 +47,8 @@
                                 <td>@item.product_quantity</td>
                                 <td>@item.repository.repository_name</td>
                                 <td>@item.product_add_time </td>
-                                <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","PostPageContent")" aria-expanded="false"><i class="mdi mdi-delete mdi-24px"></i><span class="hide-menu"></span></a></td>
+                                <td>
+                                    <form action="@Url.Action(actionName:"delete")" method="post" name="collection"><input type="submit" class="mdi mdi-delete mdi-24px" /><input type="hidden" value="@item.id" name="id" /></form></td>
                                 <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","PostPageContent")" aria-expanded="false"><i class="mdi mdi-update mdi-24px"></i><span class="hide-menu"></span></a></td>
                                 <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","PostPageContent")" aria-expanded="false"><i class="mdi mdi-hospital-building mdi-24px"></i><span class="hide-menu"></span></a></td>
                             </tr>
