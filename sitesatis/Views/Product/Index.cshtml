@@ -33,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.product)
+                            @foreach (var item in Model.product.Take(3))
                             {
                             <tr>
                                 <td>@item.product_name</td>
@@ -53,6 +53,11 @@
                             </tr>
                             }
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan=""><input type="button" class="btn-primary btn" name="name" value="" /></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
