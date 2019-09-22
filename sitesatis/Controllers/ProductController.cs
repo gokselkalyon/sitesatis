@@ -15,6 +15,11 @@ namespace sitesatis.Controllers
     {
         productmanager pm = new productmanager();
         productview pv = new productview();
+        categorymanager cm = new categorymanager();
+        cargotypemanager ctm = new cargotypemanager();
+        cargomanager carm = new cargomanager();
+        repositorymanager rm = new repositorymanager();
+
         // GET: Product
         public ActionResult Index()
         {
@@ -50,17 +55,24 @@ namespace sitesatis.Controllers
         }
 
         // POST: Product/Create
+        public ActionResult create()
+        {
+            pv.category = cm.read();
+            pv.cargotype = ctm.read();
+            pv.repository = rm.read();
+            pv.cargo = carm.read();
+            return View(pv);
+        }
+
         [HttpPost]
         public ActionResult Create(product product)
         {
             try
-            {
-               
-                pm.create(product);
+            {   pm.create(product);
                 return RedirectToAction("Index");
             }
             catch
-            {
+            {   
                 return View();
             }
         }
@@ -91,13 +103,17 @@ namespace sitesatis.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
     }
     public class productview
     {
         public IEnumerable<product> product { get; set; }
+        public IEnumerable<category> category { get; set; }
+        public IEnumerable<cargo_type> cargotype { get; set; }
+        public IEnumerable<cargo> cargo { get; set; }
+        public IEnumerable<repository> repository { get; set; }
     }
    
 }

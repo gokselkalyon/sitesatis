@@ -23,7 +23,9 @@ namespace sitesatis.Models.entity
         public int id { get; set; }
         public Nullable<int> aoutorization_id { get; set; }
         public string user_name { get; set; }
-        public string user_password { get; set; }
+        public string user_password { get {
+                return "***";
+            } set { } }
     
         public virtual autorization autorization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

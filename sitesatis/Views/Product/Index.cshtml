@@ -33,30 +33,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.product.Take(10))
+                            @try
                             {
-                            <tr>
-                                <td>@item.product_name</td>
-                                <td>@item.product_content</td>
-                                <td>@item.category.category_name</td>
-                                <td>@item.cargo_type.cargo_type1</td>
-                                <td>@item.cargo.cargo_company</td>
-                                <td>@item.product_price</td>
-                                <td>@item.prouct_image_path</td>
-                                <td>@item.user.user_name</td>
-                                <td>@item.product_quantity</td>
-                                <td>@item.repository.repository_name</td>
-                                <td>@item.product_add_time </td>
-                                <td>
-                                    <form action="@Url.Action(actionName:"delete")" method="post" name="collection"><input type="submit" class="mdi mdi-delete mdi-24px" /><input type="hidden" value="@item.id" name="id" /></form></td>
-                                <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","PostPageContent")" aria-expanded="false"><i class="mdi mdi-update mdi-24px"></i><span class="hide-menu"></span></a></td>
-                                <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","PostPageContent")" aria-expanded="false"><i class="mdi mdi-hospital-building mdi-24px"></i><span class="hide-menu"></span></a></td>
-                            </tr>
+
+                                foreach (var item in Model.product)
+                                {
+                                    <tr>
+                                        <td>@item.product_name</td>
+                                        <td>@item.product_content</td>
+                                        <td>@item.category.category_name</td>
+                                        <td>@item.cargo_type.cargo_type1</td>
+                                        <td>@item.cargo.cargo_company</td>
+                                        <td>@item.product_price</td>
+                                        <td>@item.prouct_image_path</td>
+                                        <td>@item.user.user_name.ToString();</td>
+                                        <td>@item.product_quantity</td>
+                                        <td>@item.repository.repository_name</td>
+                                        <td>
+                                            <a href="@Url.Action("Delete/"+item.id+"","Product")"><span class="mdi mdi-delete mdi-24px"></span></a>
+                                        </td>
+                                        <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "PostPageContent")" aria-expanded="false"><i class="mdi mdi-update mdi-24px"></i><span class="hide-menu"></span></a></td>
+                                        
+                                    </tr>
+                                }
                             }
+                            catch (Exception r)
+                            {
+
+                                    <span>@r.Message</span>
+                            }
+
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan=""><form action="@Url.Action(actionName:"excel")" method="get"><input type="submit" class="btn-primary btn" name="name" value="excel indir  " /></form></td>
+                                <td><form action="@Url.Action(actionName:"excel")" method="get"><input type="submit" class="btn-primary btn" name="name" value="excel indir  " /></form></td>
+                                <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Create", "Product")" aria-expanded="false"><button class="btn btn-success">Create</button>   </td>
                             </tr>
                         </tfoot>
                     </table>
@@ -67,8 +78,8 @@
     </div>
 </div>
 @*
-@Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-@Html.ActionLink("Details", "Details", new { id = item.id }) |
-@Html.ActionLink("Delete", "Delete", new { id = item.id })*@
+    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
 
 

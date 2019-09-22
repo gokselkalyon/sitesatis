@@ -14,7 +14,7 @@ namespace sitesatis.Controllers
 
         autorizationview av = new autorizationview();
         autorizationmanger autorizationm = new autorizationmanger();
-        public ActionResult Read()
+        public ActionResult Readghj()
         {
             av.autorization = autorizationm.read();
             return View(av);
