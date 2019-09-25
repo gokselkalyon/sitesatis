@@ -29,7 +29,7 @@
                                 <th width="2%">date</th>
                                 <th width="2%">delete</th>
                                 <th width="2%">update</th>
-                                <th width="2%">create</th>
+                                <th width="2%">excel</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,14 +46,15 @@
                                         <td>@item.cargo.cargo_company</td>
                                         <td>@item.product_price</td>
                                         <td>@item.prouct_image_path</td>
-                                        <td>@item.user.user_name.ToString();</td>
+                                        <td>@item.user.user_name.ToString()</td>
                                         <td>@item.product_quantity</td>
                                         <td>@item.repository.repository_name</td>
+                                        <td>@item.product_add_time </td>
                                         <td>
                                             <a href="@Url.Action("Delete/"+item.id+"","Product")"><span class="mdi mdi-delete mdi-24px"></span></a>
                                         </td>
-                                        <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "PostPageContent")" aria-expanded="false"><i class="mdi mdi-update mdi-24px"></i><span class="hide-menu"></span></a></td>
-                                        
+                                        <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Edit/"+item.id+"", "Product")" aria-expanded="false"><i class="mdi mdi-update mdi-24px"></i><span class="hide-menu"></span></a></td>
+                                        <td><form action="@Url.Action(actionName:"excel")" method="get"><input type="submit" class="btn-primary btn" name="name" value="excel indir  " /></form></td>
                                     </tr>
                                 }
                             }

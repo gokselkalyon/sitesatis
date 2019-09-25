@@ -3,39 +3,40 @@ using sitesatis.Models.repository.abstracti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace sitesatis.Models.repository.manager
 {
-    public class repositorymanager : IDatabase<entity.repository>
+    public class menumanager:IDatabase<menu>
     {
         satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
 
-        public void create(entity.repository t)
+        public void create(menu t)
         {
-            DB.repositories.Add(t);
+            DB.menus.Add(t);
             DB.SaveChanges();
         }
 
         public void delete(int id)
         {
-            DB.repositories.Remove(DB.repositories.Find(id));
+            DB.menus.Remove(DB.menus.Find());
             DB.SaveChanges();
         }
 
-        public entity.repository filterread(int id)
+        public menu filterread(Expression<Func<menu, bool>> filtre)
         {
-           return DB.repositories.Find(id);
+            return DB.menus.SingleOrDefault(filtre);
         }
 
-        public IEnumerable<entity.repository> read()
+        public IEnumerable<menu> read()
         {
-            return DB.repositories.ToList();
+            return DB.menus.ToList();
         }
 
-        public void update(entity.repository t)
+        public void update(menu t)
         {
-            DB.repositories.Attach(t);
+            DB.menus.Attach(t);
             DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
         }

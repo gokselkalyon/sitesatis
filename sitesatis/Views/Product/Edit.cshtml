@@ -1,0 +1,105 @@
+﻿@using sitesatis.Models.entity
+@model sitesatis.Controllers.productview
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_adminpanel.cshtml";
+}
+
+<h2>Create</h2>
+<div class="container">
+    <div class="row d-flex justify-content-center ">
+        <div class="col-6 p-4 bg-dark rounded">
+            <form class="needs-validation" method="post" novalidate>
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip01">ürün adı</label>
+                        <input type="text" class="form-control" name="product_name" value="@Model._product.product_name.ToString()" id="validationTooltip01" placeholder="ürün adı" required>
+                        <div class="valid-tooltip">
+                            iyi
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip02">ürün açıklaması</label>
+                        <input type="text" class="form-control" name="product_content" value="@Model._product.product_content" id="validationTooltip02" placeholder="ürün açıklaması" required>
+                        <div class="valid-tooltip">
+                            iyi
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">kategori</label>
+                            <select class="form-control" name="category_id" id="exampleFormControlSelect1">
+                                @foreach (var category in Model.category)
+                                {
+                                    <option value="@category.id">@category.category_name</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">kargo tipi</label>
+                            <select class="form-control" name="cargo_type_id" id="exampleFormControlSelect1">
+                                @foreach (var cargotype in Model.cargotype)
+                                {
+                                    <option value="@cargotype.id">@cargotype.cargo_type1 </option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">kargo şirketi</label>
+                            <select class="form-control" name="cargo_id" id="exampleFormControlSelect1">
+                                @foreach (var cargo in Model.cargo)
+                                {
+                                    <option value="@cargo.id">@cargo.cargo_company </option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip05">ürün fiyatı</label>
+                        <input type="number" name="product_price" value="@Model._product.product_price" class="form-control" id="validationTooltip05" placeholder="fiyat" required>
+                        <div class="invalid-tooltip">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip05">ürün resmi</label>
+
+                        <div class="custom-file">
+                            <input type="file" name="prouct_image_path"  value="@Model._product.prouct_image_path" class="custom-file-input" id="customFileLang" lang="es">
+                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                        </div>
+                    </div>
+                    @* publisher'ı eklettirmeyi unutturma *@
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip05">ürün adeti</label>
+                        <input type="number" name="product_quantity" value="@Model._product.product_quantity" class="form-control" id="validationTooltip05" placeholder="adet" required>
+                        <div class="invalid-tooltip">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">bulunduğu depo</label>
+                            <select class="form-control" name="repository_id" id="exampleFormControlSelect1">
+                                @foreach (var repository in Model.repository)
+                                {
+                                    <option value="@repository.id">@repository.repository_name </option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">ürünü ekle</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

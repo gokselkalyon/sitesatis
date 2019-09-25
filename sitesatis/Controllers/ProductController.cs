@@ -37,7 +37,8 @@ namespace sitesatis.Controllers
                 {
                     var row = sheet.CreateRow(i);
 
-                    var cell = row.CreateCell(0);cell.SetCellValue(item.product_name.ToString());
+                    var cell = row.CreateCell(0); cell.SetCellValue(item.product_name.ToString());
+                    var cell1 = row.CreateCell(1); cell.SetCellValue(item.product_name.ToString());
 
 
 
@@ -65,35 +66,71 @@ namespace sitesatis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(product product)
+        public ActionResult Create(product _product)
         {
             try
-            {   pm.create(product);
+            {
+                pm.create(new product
+                {
+                    id = 1,
+                    product_name = _product.product_name,
+                    product_content = _product.product_content,
+                    category_id = _product.category_id,
+                    cargo_type_id = _product.cargo_type_id,
+                    cargo_id = _product.cargo_type_id,
+                    product_price = _product.product_price,
+                    prouct_image_path = _product.prouct_image_path,
+                    publisher = 1,
+                    product_quantity = _product.product_quantity,
+                    repository_id = _product.repository_id,
+                    product_add_time = DateTime.Now
+                });
                 return RedirectToAction("Index");
             }
             catch
-            {   
+            {
                 return View();
             }
         }
-
-        // POST: Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(product _product)
+        {
+            pm.update(new product {
+                id = _product.id,
+                product_name = _product.product_name,
+                product_content = _product.product_content,
+                category_id = _product.category_id,
+                cargo_type_id = _product.cargo_type_id,
+                cargo_id = _product.cargo_type_id,
+                product_price = _product.product_price,
+                prouct_image_path = _product.prouct_image_path,
+                publisher = 1,
+                product_quantity = _product.product_quantity,
+                repository_id = _product.repository_id,
+                product_add_time = DateTime.Now
+            });
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                pv.cargo = carm.read();
+                pv.cargotype = ctm.read();
+                pv._product = pm.filterread(x=>x.id == id);
+                pv.repository = rm.read();
+                pv.product = pm.read();
+                pv.category = cm.read();
+                return View(pv);
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
-       
+
         public ActionResult Delete(int id)
         {
             try
@@ -114,6 +151,7 @@ namespace sitesatis.Controllers
         public IEnumerable<cargo_type> cargotype { get; set; }
         public IEnumerable<cargo> cargo { get; set; }
         public IEnumerable<repository> repository { get; set; }
+        public product _product { get; set; }
     }
-   
+
 }

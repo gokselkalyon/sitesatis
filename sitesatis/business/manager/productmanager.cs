@@ -3,40 +3,50 @@ using sitesatis.Models.repository.abstracti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
+
 
 namespace sitesatis.Models.repository.manager
 {
-    public class cargomanager : IDatabase<cargo>
+    public class productmanager : IDatabase<product>
     {
         satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
-        public void create(cargo t)
+
+        public void create(product t)
         {
-            DB.cargoes.Add(t);
+            DB.products.Add(t);
             DB.SaveChanges();
         }
 
         public void delete(int id)
         {
-            DB.cargoes.Remove(DB.cargoes.Find(id));
+            DB.products.Remove(DB.products.Find(id));
             DB.SaveChanges();
         }
 
-        public cargo filterread(int id)
+        public product filterread(Expression<Func<product, bool>> filtre)
         {
-            return DB.cargoes.Find(id);
+
+            return DB.products.SingleOrDefault(filtre);
         }
 
-        public IEnumerable<cargo> read()
+        public IEnumerable<product> read()
         {
-            return DB.cargoes.ToList();
+           
+            return DB.products.ToList();
         }
 
-        public void update(cargo t)
+        public void update(product t)
         {
-            DB.cargoes.Attach(t);
+            DB.products.Attach(t);
             DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
         }
+        public int count()
+        {
+            return DB.products.Count();
+        }
+
     }
 }

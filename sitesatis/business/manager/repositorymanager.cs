@@ -3,39 +3,40 @@ using sitesatis.Models.repository.abstracti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace sitesatis.Models.repository.manager
 {
-    public class categorymanager:IDatabase<category>
+    public class repositorymanager : IDatabase<entity.repository>
     {
         satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
 
-        public void create(category t)
+        public void create(entity.repository t)
         {
-            DB.categories.Add(t);
+            DB.repositories.Add(t);
             DB.SaveChanges();
         }
 
         public void delete(int id)
         {
-            DB.categories.Remove(DB.categories.Find(id));
+            DB.repositories.Remove(DB.repositories.Find(id));
             DB.SaveChanges();
         }
 
-        public category filterread(int id)
+        public entity.repository filterread(Expression<Func<entity.repository, bool>> filtre)
         {
-            return DB.categories.Find(id);
+           return DB.repositories.SingleOrDefault(filtre);
         }
 
-        public IEnumerable<category> read()
+        public IEnumerable<entity.repository> read()
         {
-            return DB.categories.ToList();
+            return DB.repositories.ToList();
         }
 
-        public void update(category t)
+        public void update(entity.repository t)
         {
-            DB.categories.Attach(t);
+            DB.repositories.Attach(t);
             DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
         }

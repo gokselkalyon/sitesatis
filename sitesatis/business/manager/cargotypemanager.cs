@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace sitesatis.Models.repository.manager
@@ -31,11 +32,11 @@ namespace sitesatis.Models.repository.manager
             }
         }
 
-        public cargo_type filterread(int id)
+        public cargo_type filterread(Expression<Func<cargo_type, bool>> filtre)
         {
             using (satissitesivol1DBEntities DB = new satissitesivol1DBEntities())
             {
-                return DB.cargo_type.Find(id);
+                return DB.cargo_type.SingleOrDefault(filtre);
             }
         }
 

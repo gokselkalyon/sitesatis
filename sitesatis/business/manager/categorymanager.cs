@@ -3,39 +3,40 @@ using sitesatis.Models.repository.abstracti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
-
 
 namespace sitesatis.Models.repository.manager
 {
-    public class autorizationmanger : IDatabase<autorization>
+    public class categorymanager:IDatabase<category>
     {
         satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
-        public void create(autorization t)
+
+        public void create(category t)
         {
-            DB.autorizations.Add(t);
+            DB.categories.Add(t);
             DB.SaveChanges();
         }
 
         public void delete(int id)
         {
-            DB.autorizations.Remove(DB.autorizations.Find(id));
+            DB.categories.Remove(DB.categories.Find(id));
             DB.SaveChanges();
         }
 
-        public autorization filterread(int id)
+        public category filterread(Expression<Func<category, bool>> filtre)
         {
-            return DB.autorizations.Find(id);
-
+            return DB.categories.SingleOrDefault(filtre);
         }
 
-        public IEnumerable<autorization> read()
+        public IEnumerable<category> read()
         {
-            return DB.autorizations.ToList();
+            return DB.categories.ToList();
         }
 
-        public void update(autorization t)
+        public void update(category t)
         {
+            DB.categories.Attach(t);
             DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
         }

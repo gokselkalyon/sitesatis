@@ -3,6 +3,7 @@ using sitesatis.Models.repository.abstracti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace sitesatis.Models.repository.manager
@@ -22,9 +23,9 @@ namespace sitesatis.Models.repository.manager
             DB.SaveChanges();
         }
 
-        public sitemaster filterread(int id)
+        public sitemaster filterread(Expression<Func<sitemaster, bool>> filtre)
         {
-            return DB.sitemasters.Find(id);
+            return DB.sitemasters.SingleOrDefault(filtre);
         }
 
         public IEnumerable<sitemaster> read()

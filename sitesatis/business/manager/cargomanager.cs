@@ -3,38 +3,39 @@ using sitesatis.Models.repository.abstracti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace sitesatis.Models.repository.manager
 {
-    public class sitepagemanager : IDatabase<sitepage>
+    public class cargomanager : IDatabase<cargo>
     {
         satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
-        public void create(sitepage t)
+        public void create(cargo t)
         {
-            DB.sitepages.Add(t);
+            DB.cargoes.Add(t);
             DB.SaveChanges();
         }
 
         public void delete(int id)
         {
-            DB.sitepages.Remove(DB.sitepages.Find(id));
+            DB.cargoes.Remove(DB.cargoes.Find(id));
             DB.SaveChanges();
         }
 
-        public sitepage filterread(int id)
+        public cargo filterread(Expression<Func<cargo, bool>> filtre)
         {
-            return DB.sitepages.Find(id);
+            return DB.cargoes.SingleOrDefault(filtre);
         }
 
-        public IEnumerable<sitepage> read()
+        public IEnumerable<cargo> read()
         {
-            return DB.sitepages.ToList();
+            return DB.cargoes.ToList();
         }
 
-        public void update(sitepage t)
+        public void update(cargo t)
         {
-            DB.sitepages.Attach(t);
+            DB.cargoes.Attach(t);
             DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
         }

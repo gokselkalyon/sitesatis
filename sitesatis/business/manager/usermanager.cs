@@ -3,47 +3,41 @@ using sitesatis.Models.repository.abstracti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
-
 
 namespace sitesatis.Models.repository.manager
 {
-    public class productmanager : IDatabase<product>
+    public class usermanager : IDatabase<user>
     {
         satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
-
-        public void create(product t)
+        public void create(user t)
         {
-            DB.products.Add(t);
+            DB.users.Add(t);
             DB.SaveChanges();
         }
 
         public void delete(int id)
         {
-            DB.products.Remove(DB.products.Find(id));
+            DB.users.Remove(DB.users.Find(id));
             DB.SaveChanges();
         }
 
-        public product filterread(int id)
+        public user filterread(Expression<Func<user, bool>> filtre)
         {
-           return DB.products.Find();
+            return DB.users.SingleOrDefault(filtre);
         }
 
-        public IEnumerable<product> read()
+        public IEnumerable<user> read()
         {
-           
-            return DB.products.ToList();
+          return DB.users.ToList();
         }
 
-        public void update(product t)
+        public void update(user t)
         {
-            DB.products.Attach(t);
+            DB.users.Attach(t);
             DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
-        }
-        public int count()
-        {
-            return DB.products.Count();
         }
     }
 }
