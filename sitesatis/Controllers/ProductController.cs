@@ -1,5 +1,8 @@
 ﻿using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using sitesatis.business.NPOI;
+using sitesatis.business.rolemanager;
+using sitesatis.Models.attribute;
 using sitesatis.Models.entity;
 using sitesatis.Models.repository.manager;
 using System;
@@ -21,12 +24,15 @@ namespace sitesatis.Controllers
         repositorymanager rm = new repositorymanager();
 
         // GET: Product
+        
         public ActionResult Index()
         {
+            Excelhelper d = new Excelhelper();
+            d.icerik();
             pv.product = pm.read();
             return View(pv);
         }
-
+        [Authorize(Roles ="admin",Users ="deneme")]
         public FileResult excel()
         {
             IWorkbook workbook = new HSSFWorkbook();

@@ -1,23 +1,25 @@
-﻿/*using NPOI.HSSF.UserModel;
-using SungurTek.Helpers.Raporlar;
-using SungurTek.Models.ViewModels.HastaAcezeTakip;
+﻿
+/*/using SungurTek.Helpers.Raporlar;
+//using SungurTek.Models.ViewModels.HastaAcezeTakip;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Web;
-using AcezeSevk = SungurTek.Entities.Models.HastaAcezeTakip.AcezeSevk;
+//using AcezeSevk = SungurTek.Entities.Models.HastaAcezeTakip.AcezeSevk;
 using System.Threading;
 using System.Globalization;
+using sitesatis.Models.entity;
+using NPOI.HSSF.UserModel;
 
 namespace SungurTek.Helpers.BakimHizmetleri
 {
     public class AnaRapor
     {
         public DateTime Gun { get; set; }
-        public List<AcezeSevk> SevkHareketleri { get; set; }
-        public List<AcezeSevk> YatanHareketleri { get; set; }
-        public List<DaireMevcutlari> Mevcutlar { get; set; }
+        public List<product> SevkHareketleri { get; set; }
+        //public List<AcezeSevk> YatanHareketleri { get; set; }
+        //public List<DaireMevcutlari> Mevcutlar { get; set; }
 
         public MemoryStream Save()
         {

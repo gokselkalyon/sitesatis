@@ -35,7 +35,6 @@
                         <tbody>
                             @try
                             {
-
                                 foreach (var item in Model.product)
                                 {
                                     <tr>
@@ -61,7 +60,7 @@
                             catch (Exception r)
                             {
 
-                                    <span>@r.Message</span>
+                                <span>@r.Message</span>
                             }
 
                         </tbody>
@@ -73,7 +72,10 @@
                         </tfoot>
                     </table>
                 </div>
-
+                <video controls="controls">
+                    <source src="https://ok.ru/video/2194318691020" />
+                </video>
+                <iframe width="560" height="315" src="//ok.ru/videoembed/2194318691020" frameborder="0" allow="autoplay" allowfullscreen></iframe>
             </div>
         </div>
     </div>
