@@ -17,7 +17,7 @@ namespace sitesatis.Models.repository.manager
             DB.menus.Add(t);
             DB.SaveChanges();
         }
-
+        //düzeltilecek
         public void delete(int id)
         {
             DB.menus.Remove(DB.menus.Find());
