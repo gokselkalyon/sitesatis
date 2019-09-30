@@ -11,7 +11,6 @@ namespace sitesatis.Models.repository.manager
     public class menumanager:IDatabase<menu>
     {
         satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
-
         public void create(menu t)
         {
             DB.menus.Add(t);

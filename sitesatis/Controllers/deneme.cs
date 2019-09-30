@@ -1,5 +1,5 @@
 ﻿
-/*/using SungurTek.Helpers.Raporlar;
+/*using SungurTek.Helpers.Raporlar;
 //using SungurTek.Models.ViewModels.HastaAcezeTakip;
 using System;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace SungurTek.Helpers.BakimHizmetleri
     {
         public DateTime Gun { get; set; }
         public List<product> SevkHareketleri { get; set; }
-        //public List<AcezeSevk> YatanHareketleri { get; set; }
+        public List<AcezeSevk> YatanHareketleri { get; set; }
         //public List<DaireMevcutlari> Mevcutlar { get; set; }
 
         public MemoryStream Save()

@@ -1,5 +1,7 @@
 ﻿using NPOI.HSSF.UserModel;
+using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
 using sitesatis.business.NPOI;
 using sitesatis.business.rolemanager;
 using sitesatis.Models.attribute;
@@ -27,33 +29,63 @@ namespace sitesatis.Controllers
         
         public ActionResult Index()
         {
-            Excelhelper d = new Excelhelper();
-            d.icerik();
+            deneme dd = new deneme();
+            dd.d1eneme();
+           // d.icerik();
             pv.product = pm.read();
             return View(pv);
         }
-        [Authorize(Roles ="admin",Users ="deneme")]
+        
         public FileResult excel()
         {
             IWorkbook workbook = new HSSFWorkbook();
-            ISheet sheet = workbook.CreateSheet("product");
-            foreach (var item in pm.read())
+            ISheet sheet1 = workbook.CreateSheet("product 12");
+
+            productmanager pm = new productmanager();
+            var style =  workbook.CreateCellStyle();
+            style.FillForegroundColor = HSSFColor.Blue.Index2;
+            style.Alignment = HorizontalAlignment.Center;
+            style.VerticalAlignment = VerticalAlignment.Center;
+            style.FillPattern = FillPattern.SolidForeground;
+
+            sheet1.AddMergedRegion(new CellRangeAddress(0, 1, 0, 9));
+            var rowIndex = 0;
+            var row = sheet1.CreateRow(rowIndex).CreateCell(0);
+            row.CellStyle = style;
+            row.SetCellValue("deneme son vol:3");
+
+            rowIndex+=2;
+            foreach(var item in pm.read())
             {
-                for (int i = 0; i < pm.count(); i++)
-                {
-                    var row = sheet.CreateRow(i);
+                var row1 = sheet1.CreateRow(rowIndex);
+                row1.CreateCell(0).SetCellValue(item.product_name);
+                row1.CreateCell(1).SetCellValue(item.cargo.cargo_company);
+                row1.CreateCell(2).SetCellValue(item.category.category_name);
+                row1.CreateCell(3).SetCellValue(item.cargo_type.cargo_type1);
+                row1.CreateCell(4).SetCellValue(item.product_content);
+                row1.CreateCell(5).SetCellValue(item.product_add_time.ToString());
+                row1.CreateCell(6).SetCellValue(item.product_price.ToString());
+                row1.CreateCell(7).SetCellValue(item.product_quantity.ToString());
+                row1.CreateCell(8).SetCellValue(item.prouct_image_path);
+                row1.CreateCell(9).SetCellValue(item.repository.repository_name);
+                sheet1.AutoSizeColumn(0);
+                sheet1.AutoSizeColumn(1);
+                sheet1.AutoSizeColumn(2);
+                sheet1.AutoSizeColumn(3);
+                sheet1.AutoSizeColumn(4);
+                sheet1.AutoSizeColumn(5);
+                sheet1.AutoSizeColumn(6);
+                sheet1.AutoSizeColumn(7);
+                sheet1.AutoSizeColumn(8);
+                sheet1.AutoSizeColumn(9);
+                rowIndex++;
 
-                    var cell = row.CreateCell(0); cell.SetCellValue(item.product_name.ToString());
-                    var cell1 = row.CreateCell(1); cell.SetCellValue(item.product_name.ToString());
-
-
-
-                }
             }
             var stream = new MemoryStream();
             workbook.Write(stream);
 
             return File(new MemoryStream(stream.GetBuffer()), "application/vdn.ms-excel", "producttable.xls");
+
         }
         // GET: Product/Details/5
         public ActionResult Details(int id)
