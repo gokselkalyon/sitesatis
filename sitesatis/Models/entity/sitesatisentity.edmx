@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="satissitesivol1DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="satissitesivol1DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="autorization">
           <Key>
             <PropertyRef Name="id" />
@@ -50,7 +50,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="product_name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="product_content" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_content" Type="nvarchar(max)" />
           <Property Name="category_id" Type="int" Nullable="false" />
           <Property Name="cargo_type_id" Type="int" />
           <Property Name="cargo_id" Type="int" />
@@ -108,7 +108,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__product__cargo_i__4D94879B">
+        <Association Name="FK__product__cargo_i__5EBF139D">
           <End Role="cargo" Type="Self.cargo" Multiplicity="0..1" />
           <End Role="product" Type="Self.product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -120,7 +120,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__product__cargo_t__4CA06362">
+        <Association Name="FK__product__cargo_t__5DCAEF64">
           <End Role="cargo_type" Type="Self.cargo_type" Multiplicity="0..1" />
           <End Role="product" Type="Self.product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -132,7 +132,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__product__categor__4BAC3F29">
+        <Association Name="FK__product__categor__5CD6CB2B">
           <End Role="category" Type="Self.category" Multiplicity="1" />
           <End Role="product" Type="Self.product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -144,7 +144,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__product__publish__4E88ABD4">
+        <Association Name="FK__product__publish__5FB337D6">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="product" Type="Self.product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -156,7 +156,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__product__reposit__4F7CD00D">
+        <Association Name="FK__product__reposit__60A75C0F">
           <End Role="repository" Type="Self.repository" Multiplicity="0..1" />
           <End Role="product" Type="Self.product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -192,6 +192,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="categoryinsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="categoryupdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryname" Type="nvarchar" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="satissitesivol1DBModelStoreContainer">
           <EntitySet Name="autorization" EntityType="Self.autorization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cargo" EntityType="Self.cargo" Schema="dbo" store:Type="Tables" />
@@ -207,23 +214,23 @@
             <End Role="sitepage" EntitySet="sitepage" />
             <End Role="menu" EntitySet="menu" />
           </AssociationSet>
-          <AssociationSet Name="FK__product__cargo_i__4D94879B" Association="Self.FK__product__cargo_i__4D94879B">
+          <AssociationSet Name="FK__product__cargo_i__5EBF139D" Association="Self.FK__product__cargo_i__5EBF139D">
             <End Role="cargo" EntitySet="cargo" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
-          <AssociationSet Name="FK__product__cargo_t__4CA06362" Association="Self.FK__product__cargo_t__4CA06362">
+          <AssociationSet Name="FK__product__cargo_t__5DCAEF64" Association="Self.FK__product__cargo_t__5DCAEF64">
             <End Role="cargo_type" EntitySet="cargo_type" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
-          <AssociationSet Name="FK__product__categor__4BAC3F29" Association="Self.FK__product__categor__4BAC3F29">
+          <AssociationSet Name="FK__product__categor__5CD6CB2B" Association="Self.FK__product__categor__5CD6CB2B">
             <End Role="category" EntitySet="category" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
-          <AssociationSet Name="FK__product__publish__4E88ABD4" Association="Self.FK__product__publish__4E88ABD4">
+          <AssociationSet Name="FK__product__publish__5FB337D6" Association="Self.FK__product__publish__5FB337D6">
             <End Role="users" EntitySet="users" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
-          <AssociationSet Name="FK__product__reposit__4F7CD00D" Association="Self.FK__product__reposit__4F7CD00D">
+          <AssociationSet Name="FK__product__reposit__60A75C0F" Association="Self.FK__product__reposit__60A75C0F">
             <End Role="repository" EntitySet="repository" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
@@ -236,8 +243,7 @@
             <End Role="users" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="satissitesivol1DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -291,7 +297,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="product_content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="category_id" Type="Int32" Nullable="false" />
           <Property Name="cargo_type_id" Type="Int32" />
           <Property Name="cargo_id" Type="Int32" />
@@ -487,6 +493,13 @@
             <End Role="sitemaster" EntitySet="sitemasters" />
             <End Role="sitepage" EntitySet="sitepages" />
           </AssociationSet>
+          <FunctionImport Name="categoryinsert">
+          <Parameter Name="categoryname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="categoryupdate">
+          <Parameter Name="categoryname" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -595,6 +608,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="categoryinsert" FunctionName="satissitesivol1DBModel.Store.categoryinsert" />
+          <FunctionImportMapping FunctionImportName="categoryupdate" FunctionName="satissitesivol1DBModel.Store.categoryupdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

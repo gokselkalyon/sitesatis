@@ -1,0 +1,25 @@
+﻿@using sitesatis.Models.entity
+@model sitesatis.Controllers.categoryview
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_adminpanel.cshtml";
+}
+
+
+<h2>Güncelle</h2>
+<div class="container">
+    <div class="row d-flex justify-content-center ">
+        <div class="col-6 p-4 bg-dark rounded">
+            <form class="needs-validation" method="post" novalidate enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip01">kategori adı</label>
+                        <input type="text" class="form-control" name="category_name" value="@Model._category.category_name.ToString()" required>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">kategori güncelle</button>
+            </form>
+        </div>
+    </div>
+</div>
+

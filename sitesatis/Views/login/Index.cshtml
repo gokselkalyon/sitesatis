@@ -1,0 +1,46 @@
+﻿f
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginPage.cshtml";
+}
+
+<div class="row d-flex justify-content-center align-content-center" style="height:100vh;">
+    <div class="col-4">
+        <div class="row bg-dark p-3 rounded">
+            <div class="col-12">
+                <form action="/login/login" method="post">
+                    <div class="form-group">
+                        <h1 class="font-weight-bold text-light text-center m-2">GIRIS</h1>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light font-weight-bold">Kullanıcı Adı</label>
+                        <input type="text" class="form-control form-text text shadow text-dark p-3" placeholder="Kullanıcı Adı" name="user_name" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light font-weight-bold">Kullanıcı şifresi</label>
+                        <input type="password" class="form-control form-text border-0 shadow text-dark p-3" placeholder="Kullanıcı sifresi" name="user_password" value="" />
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="submit" class="btn btn-success btn-block" name="giris" value="Giriş" />
+                    </div>
+                </form>
+
+
+                <textarea type="text" value="goksel kalyon yapar" id="myInput"> </textarea>
+                <button onclick="myFunction()">Copy text</button>
+
+                @*@<p>The document.execCommand() method is not supported in IE8 and earlier.</p>*@
+
+                <script>
+                    function myFunction() {
+                        var copyText = document.getElementById("myInput");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand( "copy", false, "" );
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+

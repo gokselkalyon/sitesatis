@@ -21,6 +21,6 @@ namespace sitesatis.Controllers
     }
     public class shopcartmodel
     {
-        public IEnumerable<menu> menu { get; set; }
+        public IEnumerable<Models.entity.menu> menu { get; set; }
     }
 }

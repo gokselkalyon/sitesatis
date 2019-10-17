@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-
+﻿@using sitesatis.Models.repository.manager
+@{var home =new sitepagemanager().read();} 
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +51,13 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav">
+                                        @foreach (var item in home)
+                                        {
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="~/@item.site_control/@item.site_link ">@item.site_name</a>
+                                            </li>
+                                        }
+
                                     </ul>
                                 </div>
                             </nav>

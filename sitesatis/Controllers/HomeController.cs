@@ -24,6 +24,22 @@ namespace sitesatis.Controllers
 
             return View(homeview);
         }
+        public ActionResult filtre(int id)
+        {
+           var dd = product.filtre(x => x.category_id == id);
+            homeview.homeproduct = dd;
+            homeview.homecategoriy = category.read();
+            homeview.homemenu = menu.read();
+            return View(homeview);
+        }
+        public ActionResult search(string search)
+        {
+            var dd = product.filtre(x => x.product_name.Contains(search));
+            homeview.homeproduct = dd;
+            homeview.homecategoriy = category.read();
+            homeview.homemenu = menu.read();
+            return View(homeview);
+        }
 
         public ActionResult About()
         {
@@ -43,6 +59,6 @@ namespace sitesatis.Controllers
     {
         public IEnumerable<product> homeproduct { get; set; }
         public IEnumerable<category> homecategoriy { get; set; }
-        public IEnumerable<menu> homemenu { get; set; }
+        public IEnumerable<Models.entity.menu> homemenu { get; set; }
     }
 }

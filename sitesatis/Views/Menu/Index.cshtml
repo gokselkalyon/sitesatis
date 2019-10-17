@@ -1,0 +1,64 @@
+﻿@using sitesatis.Models.entity
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminpanel.cshtml";
+}
+
+
+@model sitesatis.Controllers.menuview
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Product List</h5>
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th width="10%">id</th>
+                                <th width="15%">site link name</th>
+                                <th width="15%">site page</th>
+                                <th width="2%">delete</th>
+                                <th width="2%">update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @try
+                            {
+                                foreach (var item in Model._Menu)
+                                {
+                            <tr>
+                                <td>@item.id.ToString()</td>
+                                <td>@item.menu_link_name.ToString()</td>
+                                <td>@item.sitepage.site_control.ToString() / @item.sitepage.site_link.ToString()</td>
+                                <td>
+                                    <a href="@Url.Action("Delete/"+item.id+"","Category")"><span class="mdi mdi-delete mdi-24px"></span></a>
+                                </td>
+                                <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Edit/"+item.id+"", "Category")" aria-expanded="false"><i class="mdi mdi-update mdi-24px"></i><span class="hide-menu"></span></a></td>
+                                @** <td><form action="@Url.Action(actionName:"excel")" method="get"><input type="submit" class="btn-primary btn" name="name" value="excel indir  " /></form></td>*@
+                            </tr>
+                                }
+                            }
+                            catch (Exception r)
+                            {
+
+                                <span>@r.Message</span>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Create", "Menu")" aria-expanded="false"><button class="btn btn-success">Create</button>   </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

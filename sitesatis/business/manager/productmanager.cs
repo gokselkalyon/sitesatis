@@ -11,41 +11,61 @@ namespace sitesatis.Models.repository.manager
 {
     public class productmanager : IDatabase<product>
     {
-        satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
 
         public void create(product t)
         {
-            DB.products.Add(t);
-            DB.SaveChanges();
+            using(satissitesivol1DBEntities DB = new satissitesivol1DBEntities())
+            {
+                DB.products.Add(t);
+                DB.SaveChanges();
+            }
         }
 
         public void delete(int id)
         {
-            DB.products.Remove(DB.products.Find(id));
-            DB.SaveChanges();
+            using(satissitesivol1DBEntities DB = new satissitesivol1DBEntities())
+            {
+                DB.products.Remove(DB.products.Find(id));
+                DB.SaveChanges();
+            }
         }
 
         public product filterread(Expression<Func<product, bool>> filtre)
         {
-
-            return DB.products.SingleOrDefault(filtre);
+            using(satissitesivol1DBEntities DB = new satissitesivol1DBEntities())
+            {
+                return DB.products.SingleOrDefault(filtre);
+            }
+        }
+        public List<product> filtre(Expression<Func<product, bool>> filtre)
+        {
+            using(satissitesivol1DBEntities DB = new satissitesivol1DBEntities())
+            {
+                return DB.products.Where(filtre).ToList();
+            }
         }
 
         public IEnumerable<product> read()
         {
-           
+            satissitesivol1DBEntities DB = new satissitesivol1DBEntities();
             return DB.products.ToList();
         }
 
         public void update(product t)
         {
-            DB.products.Attach(t);
-            DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
-            DB.SaveChanges();
+            using(satissitesivol1DBEntities DB = new satissitesivol1DBEntities())
+            {
+                DB.products.Attach(t);
+                DB.Entry(t).State = System.Data.Entity.EntityState.Modified;
+                DB.SaveChanges();
+            }
         }
         public int count()
         {
-            return DB.products.Count();
+            using(satissitesivol1DBEntities DB = new satissitesivol1DBEntities())
+            {
+                return DB.products.Count();
+            }
         }
 
     }

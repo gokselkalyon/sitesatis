@@ -47,3 +47,9 @@ input[type=text] {
     border: none;
     width:100%;
 }
+#bodylogin {
+    background-image: url(/image/bg-01.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}

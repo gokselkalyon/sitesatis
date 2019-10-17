@@ -12,6 +12,8 @@ namespace sitesatis.Models.entity
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class satissitesivol1DBEntities : DbContext
     {
@@ -35,5 +37,27 @@ namespace sitesatis.Models.entity
         public virtual DbSet<sitemaster> sitemasters { get; set; }
         public virtual DbSet<sitepage> sitepages { get; set; }
         public virtual DbSet<user> users { get; set; }
+    
+        public virtual int categoryinsert(string categoryname)
+        {
+            var categorynameParameter = categoryname != null ?
+                new ObjectParameter("categoryname", categoryname) :
+                new ObjectParameter("categoryname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("categoryinsert", categorynameParameter);
+        }
+    
+        public virtual int categoryupdate(string categoryname, Nullable<int> id)
+        {
+            var categorynameParameter = categoryname != null ?
+                new ObjectParameter("categoryname", categoryname) :
+                new ObjectParameter("categoryname", typeof(string));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("categoryupdate", categorynameParameter, idParameter);
+        }
     }
 }

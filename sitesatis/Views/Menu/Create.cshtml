@@ -1,0 +1,42 @@
+﻿@using sitesatis.Models.entity
+
+@model sitesatis.Controllers.menuview
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_adminpanel.cshtml";
+}
+
+<h2>Create</h2>
+<div class="container">
+    <div class="row d-flex justify-content-center ">
+        <div class="col-6 p-4 bg-dark rounded">
+            <form class="needs-validation" method="post" novalidate enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip01">menu text</label>
+                        <input type="text" class="form-control" name="menu_link_name" id="validationTooltip01" placeholder="menu text" required>
+                        <div class="valid-tooltip">
+                            iyi
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">site link</label>
+                            <select class="form-control" name="sitepage" id="exampleFormControlSelect1">
+                                @foreach (var item in Model._Menu)
+                                {
+                                    <option value="@item.sitepage.id">@item.sitepage.site_control /@item.sitepage.site_link</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">menu ekle</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

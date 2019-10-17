@@ -24,31 +24,39 @@ namespace sitesatis.Controllers
         cargotypemanager ctm = new cargotypemanager();
         cargomanager carm = new cargomanager();
         repositorymanager rm = new repositorymanager();
+        // GET: category
 
-        // GET: Product
         
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            deneme dd = new deneme();
-            dd.d1eneme();
-           // d.icerik();
-            pv.product = pm.read();
+            int page;
+            if(id != null)
+            {
+                page = id.Value;
+            }
+            else
+            { page = 0; }
+
+            pv.product = pm.read().Skip(page).Take(10).ToList();//.Skip(page).ToList();
+            pv.pagelist = pv.product.Count() / 10;
+
             return View(pv);
         }
-        
+
         public FileResult excel()
         {
-            IWorkbook workbook = new HSSFWorkbook();
-            ISheet sheet1 = workbook.CreateSheet("product 12");
+            IWorkbook workbook = new HSSFWorkbook(); //döküman
+            ISheet sheet1 = workbook.CreateSheet("product 12"); //sayfa
 
-            productmanager pm = new productmanager();
-            var style =  workbook.CreateCellStyle();
-            style.FillForegroundColor = HSSFColor.Blue.Index2;
-            style.Alignment = HorizontalAlignment.Center;
-            style.VerticalAlignment = VerticalAlignment.Center;
-            style.FillPattern = FillPattern.SolidForeground;
+            productmanager pm = new productmanager();//
 
-            sheet1.AddMergedRegion(new CellRangeAddress(0, 1, 0, 9));
+            var style =  workbook.CreateCellStyle();//sitil dosyası
+            style.FillForegroundColor = HSSFColor.Blue.Index2; //renk
+            style.Alignment = HorizontalAlignment.Center;// metin hizalama
+            style.VerticalAlignment = VerticalAlignment.Center;//metin hzalama
+            style.FillPattern = FillPattern.SolidForeground;// renk doldurma
+
+            sheet1.AddMergedRegion(new CellRangeAddress(0, 1, 0, 9));//birleştirme
             var rowIndex = 0;
             var row = sheet1.CreateRow(rowIndex).CreateCell(0);
             row.CellStyle = style;
@@ -58,25 +66,25 @@ namespace sitesatis.Controllers
             foreach(var item in pm.read())
             {
                 var row1 = sheet1.CreateRow(rowIndex);
-                row1.CreateCell(0).SetCellValue(item.product_name);
+                row1.CreateCell(0).SetCellValue(item.product_name);//hücre değerleri
+                sheet1.AutoSizeColumn(0);// hücre veriye göre boyutlandırma
                 row1.CreateCell(1).SetCellValue(item.cargo.cargo_company);
-                row1.CreateCell(2).SetCellValue(item.category.category_name);
-                row1.CreateCell(3).SetCellValue(item.cargo_type.cargo_type1);
-                row1.CreateCell(4).SetCellValue(item.product_content);
-                row1.CreateCell(5).SetCellValue(item.product_add_time.ToString());
-                row1.CreateCell(6).SetCellValue(item.product_price.ToString());
-                row1.CreateCell(7).SetCellValue(item.product_quantity.ToString());
-                row1.CreateCell(8).SetCellValue(item.prouct_image_path);
-                row1.CreateCell(9).SetCellValue(item.repository.repository_name);
-                sheet1.AutoSizeColumn(0);
                 sheet1.AutoSizeColumn(1);
-                sheet1.AutoSizeColumn(2);
-                sheet1.AutoSizeColumn(3);
-                sheet1.AutoSizeColumn(4);
-                sheet1.AutoSizeColumn(5);
-                sheet1.AutoSizeColumn(6);
-                sheet1.AutoSizeColumn(7);
+                row1.CreateCell(2).SetCellValue(item.category.category_name);
                 sheet1.AutoSizeColumn(8);
+                row1.CreateCell(3).SetCellValue(item.cargo_type.cargo_type1);
+                sheet1.AutoSizeColumn(2);
+                row1.CreateCell(4).SetCellValue(item.product_content);
+                sheet1.AutoSizeColumn(3);
+                row1.CreateCell(5).SetCellValue(item.product_add_time.ToString());
+                sheet1.AutoSizeColumn(4);
+                row1.CreateCell(6).SetCellValue(item.product_price.ToString());
+                sheet1.AutoSizeColumn(5);
+                row1.CreateCell(7).SetCellValue(item.product_quantity.ToString());
+                sheet1.AutoSizeColumn(6);
+                row1.CreateCell(8).SetCellValue(item.prouct_image_path);
+                sheet1.AutoSizeColumn(7);
+                row1.CreateCell(9).SetCellValue(item.repository.repository_name);
                 sheet1.AutoSizeColumn(9);
                 rowIndex++;
 
@@ -104,20 +112,26 @@ namespace sitesatis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(product _product)
+        public ActionResult Create(product _product,HttpPostedFileBase prouct_image_path)
         {
+            if(prouct_image_path != null)
+            {
+                string dosyaYolu = Path.GetFileName(prouct_image_path.FileName);
+                var yuklemeYeri = Path.Combine(Server.MapPath("~/image/"), dosyaYolu);
+                prouct_image_path.SaveAs(yuklemeYeri);
+                _product.prouct_image_path = prouct_image_path.FileName;
+            }
             try
             {
                 pm.create(new product
                 {
-                    id = 1,
                     product_name = _product.product_name,
                     product_content = _product.product_content,
                     category_id = _product.category_id,
                     cargo_type_id = _product.cargo_type_id,
                     cargo_id = _product.cargo_type_id,
                     product_price = _product.product_price,
-                    prouct_image_path = _product.prouct_image_path,
+                    prouct_image_path = _product.prouct_image_path.ToString(),
                     publisher = 1,
                     product_quantity = _product.product_quantity,
                     repository_id = _product.repository_id,
@@ -131,8 +145,15 @@ namespace sitesatis.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Edit(product _product)
+        public ActionResult Edit(product _product, HttpPostedFileBase prouct_image_path)
         {
+            if(prouct_image_path != null)
+            {
+                string dosyaYolu = Path.GetFileName(prouct_image_path.FileName);
+                var yuklemeYeri = Path.Combine(Server.MapPath("~/image/"), dosyaYolu);
+                prouct_image_path.SaveAs(yuklemeYeri);
+                _product.prouct_image_path = prouct_image_path.FileName;
+            }
             pm.update(new product {
                 id = _product.id,
                 product_name = _product.product_name,
@@ -190,6 +211,7 @@ namespace sitesatis.Controllers
         public IEnumerable<cargo> cargo { get; set; }
         public IEnumerable<repository> repository { get; set; }
         public product _product { get; set; }
+        public int pagelist { get; set; }
     }
 
 }

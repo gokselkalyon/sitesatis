@@ -44,24 +44,24 @@ namespace sitesatis.business.NPOI
                 {
                     var row1 = sheet1.CreateRow(rowIndex);
                     row1.CreateCell(0).SetCellValue(item.product_name);
-                    row1.CreateCell(1).SetCellValue(item.cargo.cargo_company);
-                    row1.CreateCell(2).SetCellValue(item.category.category_name);
-                    row1.CreateCell(3).SetCellValue(item.cargo_type.cargo_type1);
-                    row1.CreateCell(4).SetCellValue(item.product_content);
-                    row1.CreateCell(5).SetCellValue(item.product_add_time.ToString());
-                    row1.CreateCell(6).SetCellValue(item.product_price.ToString());
-                    row1.CreateCell(7).SetCellValue(item.product_quantity.ToString());
-                    row1.CreateCell(8).SetCellValue(item.prouct_image_path);
-                    row1.CreateCell(9).SetCellValue(item.repository.repository_name);
                     sheet1.AutoSizeColumn(0);
+                    row1.CreateCell(1).SetCellValue(item.cargo.cargo_company);
                     sheet1.AutoSizeColumn(1);
+                    row1.CreateCell(2).SetCellValue(item.category.category_name);
                     sheet1.AutoSizeColumn(2);
+                    row1.CreateCell(3).SetCellValue(item.cargo_type.cargo_type1);
                     sheet1.AutoSizeColumn(3);
+                    row1.CreateCell(4).SetCellValue(item.product_content);
                     sheet1.AutoSizeColumn(4);
+                    row1.CreateCell(5).SetCellValue(item.product_add_time.ToString());
                     sheet1.AutoSizeColumn(5);
+                    row1.CreateCell(6).SetCellValue(item.product_price.ToString());
                     sheet1.AutoSizeColumn(6);
+                    row1.CreateCell(7).SetCellValue(item.product_quantity.ToString());
                     sheet1.AutoSizeColumn(7);
+                    row1.CreateCell(8).SetCellValue(item.prouct_image_path);
                     sheet1.AutoSizeColumn(8);
+                    row1.CreateCell(9).SetCellValue(item.repository.repository_name);
                     sheet1.AutoSizeColumn(9);
                     rowIndex++;
 

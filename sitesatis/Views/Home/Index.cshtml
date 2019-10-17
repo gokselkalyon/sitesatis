@@ -8,9 +8,11 @@
             @foreach (var product in Model.homeproduct)
             {
                 <div class="col-xl-3 col-6 p-1">
-                    <div class="card">
-                        <img class="card-img-top" src="~/image/@product.prouct_image_path" alt="Card image" style="width:100%">
-                        <div class="card-body">
+                    <div class="card" style="">
+                        <div class="d-flex justify-content-center align-content-center"  style="height:400px;width:100%">
+                            <img class=" img-thumbnail" src="~/image/@product.prouct_image_path" alt="Card image">
+                        </div>
+                         <div class="card-body">
                             <h4 class="card-title">@product.product_name</h4>
                             <p class="card-text">@product.product_content</p>
                             <a href="/Productdetailpage/Index/@product.id" class="btn " style="background-color:#deded2;">ürünü göster</a>

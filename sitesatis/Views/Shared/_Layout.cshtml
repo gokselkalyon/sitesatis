@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-lg-8 pt-3">
                             <div class="search-container">
-                                <form action=" " >
+                                <form action="~/Home/search/" >
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-11  p-0">
@@ -46,10 +46,10 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav">
-                                        @foreach (var item in Model.homemenu)
+                                        @foreach(var item in Model.homemenu)
                                         {
                                             <li class="nav-item active">
-                                                <a class="nav-link" href="#">@item.sitepage.site_name</a>
+                                                <a class="nav-link" href="~/@item.sitepage.site_control/@item.sitepage.site_link ">@item.sitepage.site_name</a>
                                             </li>
                                         }
 
@@ -80,23 +80,23 @@
                                         <ul>
                                             @foreach (var category in Model.homecategoriy)
                                             {
-                                                <li><a href="#">@category.category_name</a></li>
+                                                <li><a href="~/Home/filtre/@category.id">@category.category_name</a></li>
                                             }
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="row mt-5 d-flex justify-content-center">
+                                @*<div class="row mt-5 d-flex justify-content-center">
 
                                     <div class="col-12 pt-2 menu ">
                                         <div class="col-12 pt-2 bg-dark text-light font-weight-bold text-uppercase" style="font-size:15pt;">
                                             filtre
                                         </div>
                                         <ul>
-                                            <li><a href="#">erkek</a></li>
-                                            <li><a href="#">kadın</a></li>
+                                            <li><a href="~/Home/cinsiyet/erkek">erkek</a></li>
+                                            <li><a href="~/Home/cinsiyet/kadin">kadın</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                         <div class="col-lg-9  ">
